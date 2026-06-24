@@ -72,9 +72,14 @@ export default function PlansPage() {
     <Layout>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <h1 style={{ fontSize: 26 }}>Le tue schede</h1>
-        <button className="btn btn-primary" onClick={() => setShowForm(!showForm)}>
-          {showForm ? 'Annulla' : '+ Nuova scheda'}
-        </button>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <Link to="/import-pdf" className="btn">
+            Importa da PDF
+          </Link>
+          <button className="btn btn-primary" onClick={() => setShowForm(!showForm)}>
+            {showForm ? 'Annulla' : '+ Nuova scheda'}
+          </button>
+        </div>
       </div>
 
       {showForm && (
