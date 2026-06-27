@@ -8,6 +8,7 @@ import LogSessionPage from './pages/LogSessionPage';
 import ProgressPage from './pages/ProgressPage';
 import ProfilePage from './pages/ProfilePage';
 import ImportPdfPage from './pages/ImportPdfPage';
+import ExercisesPage from './pages/ExercisesPage';
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
   const { token, loading } = useAuth();
@@ -57,6 +58,14 @@ function AppRoutes() {
         element={
           <PrivateRoute>
             <ProgressPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/exercises"
+        element={
+          <PrivateRoute>
+            <ExercisesPage />
           </PrivateRoute>
         }
       />

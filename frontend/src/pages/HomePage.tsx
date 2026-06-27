@@ -26,6 +26,12 @@ export default function HomePage() {
     setLoading(false);
   }
 
+  async function handleDeleteSession(id: number) {
+    if (!confirm("Eliminare questa sessione? L'azione non è reversibile.")) return;
+    await api.post('deleteSession', { sessionId: id });
+    loadData();
+  }
+
   const today = new Date().toLocaleDateString('it-IT', {
     weekday: 'long',
     day: 'numeric',
@@ -78,7 +84,7 @@ export default function HomePage() {
       ) : (
         recentSessions.map((session) => (
           <div className="card" key={session.id}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 6 }}>
               <span className="mono" style={{ fontWeight: 700 }}>
                 {new Date(session.session_date).toLocaleDateString('it-IT', {
                   day: '2-digit',
@@ -91,6 +97,14 @@ export default function HomePage() {
               </span>
             </div>
             {session.notes && <p style={{ fontSize: 14, marginTop: 8 }}>{session.notes}</p>}
+            <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+              <Link to={`/log?sessionId=${session.id}`} className="btn btn-small">
+                Modifica
+              </Link>
+              <button className="btn btn-small btn-rust" onClick={() => handleDeleteSession(session.id)}>
+                Elimina
+              </button>
+            </div>
           </div>
         ))
       )}

@@ -138,7 +138,7 @@ export default function ImportPdfPage() {
       {error && <div className="error-banner">{error}</div>}
 
       {file && (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, alignItems: 'flex-start' }}>
+        <div className="pdf-import-grid">
           {/* Colonna sinistra: anteprima PDF */}
           <div className="card">
             <span className="card-label">Anteprima — {file.name}</span>
@@ -217,11 +217,8 @@ export default function ImportPdfPage() {
             {rows.map((row, idx) => (
               <div
                 key={idx}
-                className="exercise-row"
-                style={{
-                  gridTemplateColumns: '20px 2fr 1fr 1fr auto',
-                  opacity: row.included ? 1 : 0.4,
-                }}
+                className="exercise-row-checkbox"
+                style={{ opacity: row.included ? 1 : 0.4 }}
               >
                 <input
                   type="checkbox"

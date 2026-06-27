@@ -25,6 +25,7 @@ export interface PlanExercise {
   target_reps?: string;
   targetReps?: string;
   notes?: string;
+  variants?: string[];
   position?: number;
 }
 
@@ -33,6 +34,7 @@ export interface WorkoutPlan {
   name: string;
   description?: string | null;
   day_of_week?: number | null;
+  rest_seconds?: number;
   exercises: PlanExercise[];
   created_at?: string;
 }
@@ -52,6 +54,7 @@ export interface SessionEntry {
 export interface WorkoutSession {
   id: number;
   plan_id?: number | null;
+  plan_name?: string | null;
   session_date: string;
   notes?: string | null;
   entries: SessionEntry[];
@@ -76,4 +79,15 @@ export interface ExerciseProgressPoint {
   date: string;
   maxWeight: number;
   maxReps: number;
+}
+
+export interface ExerciseHistoryEntry {
+  id: number;
+  session_id: number;
+  session_date: string | null;
+  exercise_name: string;
+  set_number: number;
+  reps: number;
+  weight_kg: number;
+  rpe: number | null;
 }

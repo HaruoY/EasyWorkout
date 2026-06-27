@@ -102,9 +102,10 @@ input[type='number'] {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 0;
+  padding: 20px 0;
   border-bottom: 2px solid var(--ink);
   margin-bottom: 28px;
+  position: relative;
 }
 
 .brand {
@@ -143,6 +144,59 @@ input[type='number'] {
 .nav-link.active {
   background: var(--ink);
   color: var(--paper);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.nav-overlay {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(78vw, 280px);
+    background: var(--paper-raised);
+    border-left: 2px solid var(--ink);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 76px 16px 24px;
+    transform: translateX(100%);
+    transition: transform 0.2s ease;
+    z-index: 50;
+  }
+  .nav-links.open {
+    transform: translateX(0);
+  }
+  .nav-link {
+    padding: 14px 12px;
+    font-size: 14px;
+    text-align: left;
+  }
+  .menu-toggle {
+    display: flex;
+  }
+  .nav-overlay.open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 29, 41, 0.35);
+    z-index: 40;
+  }
 }
 
 .btn {
@@ -314,12 +368,166 @@ input[type='number'] {
   .plan-grid {
     grid-template-columns: 1fr;
   }
-  .nav-links {
-    gap: 2px;
+  .app-shell {
+    padding: 0 14px 100px;
   }
-  .nav-link {
-    padding: 6px 8px;
-    font-size: 11px;
+  .card {
+    padding: 16px;
+  }
+  h1 {
+    font-size: 22px !important;
+  }
+  .stat-value {
+    font-size: 24px;
+  }
+  .exercise-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 12px 0;
+  }
+  .exercise-row > button {
+    justify-self: flex-end;
+    margin-top: -38px;
+  }
+  .set-row {
+    grid-template-columns: 32px 1fr 60px 60px auto;
+    gap: 6px;
+  }
+}
+
+/* Timer di recupero */
+.rest-timer {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 999px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 6px 20px rgba(26, 29, 41, 0.3);
+  z-index: 60;
+  font-family: var(--font-mono);
+}
+
+.rest-timer.done {
+  background: var(--sage);
+}
+
+.rest-timer-value {
+  font-size: 20px;
+  font-weight: 700;
+  min-width: 48px;
+  text-align: center;
+}
+
+.rest-timer button {
+  background: rgba(247, 245, 240, 0.15);
+  border: none;
+  color: var(--paper);
+  border-radius: 999px;
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+}
+
+/* Varianti esercizio */
+.variant-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: var(--rust-light);
+  color: var(--rust);
+  padding: 3px 8px;
+  border-radius: var(--radius);
+  margin: 2px 4px 2px 0;
+}
+
+.variant-tag button {
+  background: none;
+  border: none;
+  color: var(--rust);
+  font-size: 12px;
+  padding: 0;
+  line-height: 1;
+}
+
+.variant-input-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.variant-input-row input {
+  flex: 1;
+}
+
+/* Storico esercizi */
+.exercise-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  background: var(--paper-raised);
+}
+
+.pdf-import-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.exercise-row-checkbox {
+  display: grid;
+  grid-template-columns: 20px 2fr 1fr 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--grid-line);
+}
+
+@media (max-width: 800px) {
+  .pdf-import-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .exercise-row-checkbox {
+    grid-template-columns: 20px 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+  .exercise-row-checkbox input[type='checkbox'] {
+    grid-row: 1 / 3;
+  }
+}
+
+.history-entry-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 70px 70px 60px auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--grid-line);
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .history-entry-row {
+    grid-template-columns: 70px 1fr 50px 50px auto;
+    font-size: 12px;
+  }
+  .history-entry-row .history-rpe-col {
+    display: none;
   }
 }
 
